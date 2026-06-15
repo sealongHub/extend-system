@@ -17,9 +17,4 @@ class Category extends Model
     {
         return $this->hasMany(Expense::class);
     }
-
-    public function savings()
-    {
-        return $this->hasMany(Saving::class);
-    }
 }
