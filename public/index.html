@@ -30,6 +30,33 @@
     <h1>Extend System API Documentation</h1>
     <p>All API requests should be prefixed with <code>/api</code>. Timezone is set to <strong>Asia/Phnom_Penh</strong>.</p>
 
+    <!-- Auth -->
+    <h2>Authentication API</h2>
+    
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/api/register</span>
+        </div>
+        <div class="details"><p>Register a new user.</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/api/login</span>
+        </div>
+        <div class="details"><p>Login user and receive authentication token.</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/api/logout</span>
+        </div>
+        <div class="details"><p>Logout user (requires authentication).</p></div>
+    </div>
+
     <!-- Categories -->
     <h2>Categories API</h2>
     
@@ -42,9 +69,41 @@
             <p>List all categories.</p>
             <table class="params">
                 <tr><th>Parameter</th><th>Type</th><th>Required</th><th>Description</th></tr>
-                <tr><td>type</td><td>string</td><td>No</td><td>Filter by <code>income</code> or <code>expense</code></td></tr>
+                <tr><td>type</td><td>string</td><td>No</td><td>Filter by <code>income</code>, <code>expense</code>, or <code>saving</code></td></tr>
             </table>
         </div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/categories/expense</span>
+        </div>
+        <div class="details"><p>List all expense categories.</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/categories/income</span>
+        </div>
+        <div class="details"><p>List all income categories.</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/categories/saving</span>
+        </div>
+        <div class="details"><p>List all saving categories.</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/categories/{id}</span>
+        </div>
+        <div class="details"><p>Get a specific category by ID.</p></div>
     </div>
 
     <div class="endpoint">
@@ -57,20 +116,36 @@
             <table class="params">
                 <tr><th>Key</th><th>Type</th><th>Required</th><th>Default / Options</th></tr>
                 <tr><td>name</td><td>string</td><td><span class="required">Yes</span></td><td>Category name</td></tr>
-                <tr><td>type</td><td>string</td><td><span class="required">Yes</span></td><td><code>income</code>, <code>expense</code></td></tr>
+                <tr><td>type</td><td>string</td><td><span class="required">Yes</span></td><td><code>income</code>, <code>expense</code>, <code>saving</code></td></tr>
             </table>
         </div>
     </div>
 
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/api/categories/{id}</span>
+        </div>
+        <div class="details"><p>Update a category (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method delete">DELETE</span>
+            <span class="path">/api/categories/{id}</span>
+        </div>
+        <div class="details"><p>Delete a category (requires authentication).</p></div>
+    </div>
+
     <!-- Incomes -->
-    <h2>Incomes API</h2>
+    <h2>Incomes API (Protected)</h2>
 
     <div class="endpoint">
         <div class="endpoint-header">
             <span class="method get">GET</span>
             <span class="path">/api/incomes</span>
         </div>
-        <div class="details"><p>Fetch all income records with categories.</p></div>
+        <div class="details"><p>Fetch all income records with categories (requires authentication).</p></div>
     </div>
 
     <div class="endpoint">
@@ -79,7 +154,7 @@
             <span class="path">/api/incomes</span>
         </div>
         <div class="details">
-            <p>Add a new income record.</p>
+            <p>Add a new income record (requires authentication).</p>
             <table class="params">
                 <tr><th>Key</th><th>Type</th><th>Required</th><th>Description</th></tr>
                 <tr><td>amount</td><td>numeric</td><td><span class="required">Yes</span></td><td>The decimal amount</td></tr>
@@ -95,18 +170,34 @@
             <span class="method put">PUT</span>
             <span class="path">/api/incomes/{id}</span>
         </div>
-        <div class="details"><p>Update existing income record (all keys optional in request body).</p></div>
+        <div class="details"><p>Update existing income record (all keys optional in request body, requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method delete">DELETE</span>
+            <span class="path">/api/incomes/{id}</span>
+        </div>
+        <div class="details"><p>Delete an income record (requires authentication).</p></div>
     </div>
 
     <!-- Expenses -->
-    <h2>Expenses API</h2>
+    <h2>Expenses API (Protected)</h2>
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/expenses</span>
+        </div>
+        <div class="details"><p>Fetch all expense records (requires authentication).</p></div>
+    </div>
+    
     <div class="endpoint">
         <div class="endpoint-header">
             <span class="method post">POST</span>
             <span class="path">/api/expenses</span>
         </div>
         <div class="details">
-            <p>Add a new expense record.</p>
+            <p>Add a new expense record (requires authentication).</p>
             <table class="params">
                 <tr><th>Key</th><th>Type</th><th>Required</th><th>Description</th></tr>
                 <tr><td>amount</td><td>numeric</td><td><span class="required">Yes</span></td><td>Amount spent</td></tr>
@@ -117,16 +208,87 @@
         </div>
     </div>
 
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/api/expenses/{id}</span>
+        </div>
+        <div class="details"><p>Update an expense record (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method delete">DELETE</span>
+            <span class="path">/api/expenses/{id}</span>
+        </div>
+        <div class="details"><p>Delete an expense record (requires authentication).</p></div>
+    </div>
+
+    <!-- Savings -->
+    <h2>Savings API (Protected)</h2>
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/savings</span>
+        </div>
+        <div class="details"><p>Fetch all savings records (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method post">POST</span>
+            <span class="path">/api/savings</span>
+        </div>
+        <div class="details"><p>Create a new savings record (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/api/savings/{id}</span>
+        </div>
+        <div class="details"><p>Update a savings record (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method delete">DELETE</span>
+            <span class="path">/api/savings/{id}</span>
+        </div>
+        <div class="details"><p>Delete a savings record (requires authentication).</p></div>
+    </div>
+
+    <!-- Profile -->
+    <h2>Profile API (Protected)</h2>
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method get">GET</span>
+            <span class="path">/api/profile</span>
+        </div>
+        <div class="details"><p>Fetch current user profile (requires authentication).</p></div>
+    </div>
+
+    <div class="endpoint">
+        <div class="endpoint-header">
+            <span class="method put">PUT</span>
+            <span class="path">/api/profile</span>
+        </div>
+        <div class="details"><p>Update current user profile (requires authentication).</p></div>
+    </div>
+
     <!-- Reports -->
-    <h2>Reports API (Cambodia Time)</h2>
+    <h2>Reports API (Protected - Cambodia Time)</h2>
     <div class="endpoint">
         <div class="endpoint-header"><span class="method get">GET</span><span class="path">/api/reports/daily</span></div>
+        <div class="details"><p>Get daily expense and income reports (requires authentication).</p></div>
     </div>
     <div class="endpoint">
         <div class="endpoint-header"><span class="method get">GET</span><span class="path">/api/reports/weekly</span></div>
+        <div class="details"><p>Get weekly expense and income reports (requires authentication).</p></div>
     </div>
     <div class="endpoint">
         <div class="endpoint-header"><span class="method get">GET</span><span class="path">/api/reports/monthly</span></div>
+        <div class="details"><p>Get monthly expense and income reports (requires authentication).</p></div>
     </div>
 
     <footer>

@@ -16,11 +16,26 @@ class CategoryController extends Controller
         return $query->get();
     }
 
+    public function expenseCategory(){
+        $query = Category::query()->where('type','expense');
+        return $query->get();
+    }
+    
+    public function incomeCategory(){
+        $query = Category::query()->where('type','income');
+        return $query->get();
+    }
+
+    public function savingCategory(){
+        $query = Category::query()->where('type','saving');
+        return $query->get();
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'type' => 'required|in:income,expense',
+            'type' => 'required|in:income,expense,saving',
         ]);
 
         return Category::create($validated);
@@ -35,7 +50,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string',
-            'type' => 'sometimes|in:income,expense',
+            'type' => 'sometimes|in:income,expense,saving',
         ]);
 
         $category->update($validated);
