@@ -44,6 +44,9 @@ Route::middleware('token.auth')->group(function () {
     Route::get('reports/daily', [ReportController::class, 'daily']);
     Route::get('reports/weekly', [ReportController::class, 'weekly']);
     Route::get('reports/monthly', [ReportController::class, 'monthly']);
+
+
+    
 });
 
 // Deployment Helper - Run migrations
